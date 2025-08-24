@@ -7,7 +7,8 @@ import 'package:profile_dashboard/widgets/section_widget.dart';
 import 'package:profile_dashboard/widgets/service_widget.dart';
 
 class ProfileDash extends StatelessWidget {
-  ProfileDash({super.key});
+  String emailUser;
+  ProfileDash(this.emailUser, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +47,7 @@ class ProfileDash extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Text('Hello $emailUser'),
               Row(
                 spacing: 20,
                 mainAxisAlignment: MainAxisAlignment.center,

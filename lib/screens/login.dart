@@ -1,92 +1,141 @@
 import 'package:flutter/material.dart';
 import 'package:profile_dashboard/helpers/constants.dart';
 import 'package:profile_dashboard/screens/profile_dash.dart';
+import 'package:profile_dashboard/screens/sign_up.dart';
 import 'package:profile_dashboard/widgets/custom_text_feild.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
-  final TextEditingController emailCont = TextEditingController();
-  final TextEditingController passCont = TextEditingController();
 
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  //Memorey leak
+  String? emailUser = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          spacing: 20,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Welcom in Our App',
-              style: AppConstants.primary_numbers_text_style,
-            ),
-            Text(
-              'sign in to access your account',
-              style: TextStyle(fontSize: 12),
-            ),
-            SizedBox(height: 40),
-
-            CustomTextFeild(
-              hint: 'Enter your Email',
-              icon: Icons.email,
-              controller: emailCont,
-            ),
-            CustomTextFeild(
-              controller: passCont,
-              hint: 'password',
-              icon: Icons.lock_outline_rounded,
-              isPassword: true,
-            ),
-            SizedBox(height: 40),
-            ElevatedButton(
-              onPressed: () {
-                //@
-                String emailData = emailCont.text;
-                String passData = passCont.text;
-
-                if (emailData.isEmpty | passData.isEmpty) {
-                  showMessgae(context, 'Enter valid data');
-                  emailCont.clear();
-                  passCont.clear();
-                } else if (!emailData.contains('@')) {
-                  // .com
-                  showMessgae(context, 'Enter valid email');
-                } else if (passData.length < 5) {
-                  //spcial character
-                  showMessgae(context, 'Enter valid password');
-                  passCont.clear();
-                } else {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return ProfileDash();
-                      },
-                    ),
-                  );
-                }
-                // print();
-              },
-
-              // login(context),
-              child: Text('Login', style: TextStyle(color: Colors.white)),
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                minimumSize: Size(double.infinity, 15),
-                backgroundColor: AppConstants.primaryColor,
-                padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            spacing: 20,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Welcom in Our App (Login IN)',
+                style: AppConstants.primary_numbers_text_style,
               ),
-            ),
-          ],
+              Text(
+                'sign in to access your account',
+                style: TextStyle(fontSize: 12),
+              ),
+              SizedBox(height: 40),
+
+              CustomTextFeild(
+                hint: 'Enter your Email',
+                icon: Icons.email,
+                input_type: TextInputType.emailAddress,
+                custom_validator: (email) {
+                  emailUser = email;
+                  if (email == null || email.isEmpty)
+                    return "Enter valid email";
+                  if (!email.contains('@')) return "Remebmer @";
+                  if (!email.contains('.com')) return "Remebmer .com";
+                  return null;
+                },
+              ),
+              CustomTextFeild(
+                hint: 'password',
+                icon: Icons.lock_outline_rounded,
+                isPassword: true,
+                custom_validator: (password) {
+                  if (password == null || password.isEmpty)
+                    return "Enter valid password";
+                  if (password.length < 5) return "password more than 5 digits";
+                  if (!password.contains(RegExp(r'[!@#$%^&*]')))
+                    return 'should has special char.';
+                  return null;
+                },
+              ),
+              SizedBox(height: 40),
+              ElevatedButton(
+                onPressed: () => _login(context),
+                child: Text('Login', style: TextStyle(color: Colors.white)),
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  minimumSize: Size(double.infinity, 15),
+                  backgroundColor: AppConstants.primaryColor,
+                  padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Dont have an account'),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return SignUp();
+                          },
+                        ),
+                      );
+                    },
+                    child: Text(' Sign up'),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  // login(BuildContext context) {
+  _login(BuildContext context) {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.reset();
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return ProfileDash(emailUser!);
+          },
+        ),
+      );
+    }
+    //@
+    // String emailData = emailCont.text;
+    // String passData = passCont.text;
 
-  // }
+    // if (emailData.isEmpty || passData.isEmpty) {
+    //   showMessgae(context, 'Enter valid data');
+    //   emailCont.clear();
+    //   passCont.clear();
+    // } else if (!emailData.contains('@') || !emailData.contains('.com')) {
+    //   // .com
+    //   showMessgae(context, 'Enter valid email');
+    // } else if (passData.length < 5 ||
+    //     !passData.contains("*") ||
+    //     !passData.contains("#")) {
+    //   //spcial character
+    //   // showMessgae(context, 'Enter valid password');
+    //   passCont.clear();
+    // } else {
+    //   emailCont.clear();
+    //   passCont.clear();
+    //   Navigator.push(
+    //     context,
+    //     MaterialPageRoute(
+    //       builder: (context) {
+    //         return ProfileDash();
+    //       },
+    //     ),
+    //   );
+    // }
+  }
 }

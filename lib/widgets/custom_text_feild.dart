@@ -5,19 +5,23 @@ class CustomTextFeild extends StatelessWidget {
   final String hint;
   final IconData icon;
   final bool isPassword;
-  final TextEditingController controller;
+  final String? Function(String?)? custom_validator;
+  final TextInputType input_type;
   const CustomTextFeild({
     super.key,
     required this.hint,
     required this.icon,
-    required this.controller,
+    this.input_type = TextInputType.text,
+
     this.isPassword = false,
+    this.custom_validator,
   });
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      controller: controller,
+    return TextFormField(
+      keyboardType: input_type,
+      validator: custom_validator,
       obscureText: isPassword,
       decoration: InputDecoration(
         hintText: hint,
@@ -25,7 +29,8 @@ class CustomTextFeild extends StatelessWidget {
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(color: AppConstants.primaryColor),
+          borderSide: BorderSide(color: Colors.lightBlue),
+          // AppConstants.primaryColorvzx
         ),
         filled: true,
 
