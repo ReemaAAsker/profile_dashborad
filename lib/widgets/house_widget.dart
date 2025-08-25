@@ -15,8 +15,8 @@ class HouseWidget extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(right: 20),
 
-      width: 100,
-      height: 130,
+      width: 80,
+      height: 100,
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
@@ -35,8 +35,8 @@ class HouseWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Container(
-            width: 55,
-            height: 55,
+            width: 40,
+            height: 40,
             decoration: BoxDecoration(
               border: Border.all(color: Color(0xffFDEDEB), width: 4),
               shape: BoxShape.circle,
@@ -52,8 +52,8 @@ class HouseWidget extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(
               overflow: TextOverflow.ellipsis,
-              fontWeight: FontWeight.bold,
-              fontSize: 13,
+              fontSize: 10,
+              fontWeight: FontWeight.w500,
             ),
           ),
         ],

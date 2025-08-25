@@ -1,9 +1,8 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:profile_dashboard/helpers/constants.dart';
 
 class ServiceWidget extends StatelessWidget {
-  Image icon;
+  String icon;
   String title;
   String description;
 
@@ -17,8 +16,7 @@ class ServiceWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 16, horizontal: 14),
-      margin: EdgeInsets.only(right: 20),
+      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
@@ -32,8 +30,8 @@ class ServiceWidget extends StatelessWidget {
       ),
       child: ListTile(
         onTap: () => showMessgae(context, "Go ahead "),
-        leading: icon,
-        trailing: Icon(Icons.arrow_forward, size: 30, color: Colors.black),
+        leading: Image.asset('icons/$icon', width: 30, height: 30),
+        trailing: Icon(Icons.arrow_forward, size: 20, color: Colors.black),
         title: Text(title, style: TextStyle(fontWeight: FontWeight.bold)),
         subtitle: Text(description, style: TextStyle(color: Colors.grey)),
       ),

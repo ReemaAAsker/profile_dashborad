@@ -19,18 +19,18 @@ class FeedbackWidget extends StatelessWidget {
       children: [
         Container(
           width: 200,
-          height: 100,
+          height: 90,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             image: DecorationImage(fit: BoxFit.cover, image: background_img),
           ),
         ),
         Positioned(
-          left: 125,
+          left: 100,
           child: Container(
             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            width: 350,
-            height: 100,
+            width: 230,
+            height: 80,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(20),
@@ -46,13 +46,13 @@ class FeedbackWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               spacing: 12,
               children: [
-                Image.asset('icons/$profile_img', width: 60, height: 60),
+                Image.asset('icons/$profile_img', width: 35, height: 35),
 
                 Expanded(
                   child: Text(
                     feedback_text,
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
                   ),
                 ),
               ],

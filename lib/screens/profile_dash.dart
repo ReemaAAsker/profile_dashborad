@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:profile_dashboard/helpers/constants.dart';
+import 'package:profile_dashboard/screens/splash.dart';
 import 'package:profile_dashboard/widgets/feedback_widget.dart';
 import 'package:profile_dashboard/widgets/house_widget.dart';
 import 'package:profile_dashboard/widgets/section_widget.dart';
@@ -12,12 +12,17 @@ class ProfileDash extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).canPop();
+        },
+        child: Icon(Icons.help),
+      ),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         scrolledUnderElevation: 0,
         surfaceTintColor: Colors.transparent,
-        actionsPadding: EdgeInsets.only(right: 20),
         title: Text(
           'Profile',
           style: Theme.of(
@@ -29,6 +34,9 @@ class ProfileDash extends StatelessWidget {
             onTap: () => showMessgae(context, "Hello Reema!"),
             child: Image.asset('icons/menu.png', height: 20, width: 20),
           ),
+          SizedBox(width: 10),
+
+          SizedBox(width: 10),
         ],
       ),
 
@@ -43,8 +51,8 @@ class ProfileDash extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    width: 100,
-                    height: 100,
+                    width: 80,
+                    height: 80,
                     decoration: BoxDecoration(
                       border: Border.all(
                         color: AppConstants.light_primary_color,
@@ -62,14 +70,14 @@ class ProfileDash extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Adewale Taiwo', style: TextStyle(fontSize: 20)),
+                      Text('Adewale Taiwo', style: TextStyle(fontSize: 16)),
                       SizedBox(height: 8),
                       Text(
                         'House Manager',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: AppConstants.primaryColor,
-                          fontSize: 14,
+                          fontSize: 12,
                         ),
                       ),
                     ],
@@ -82,8 +90,8 @@ class ProfileDash extends StatelessWidget {
                     child: Container(
                       height: 200,
 
-                      margin: EdgeInsets.all(30),
-                      padding: EdgeInsets.all(30),
+                      margin: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(25),
                       decoration: BoxDecoration(
                         color: AppConstants.light_primary_color,
                         borderRadius: BorderRadius.circular(16),
@@ -122,8 +130,9 @@ class ProfileDash extends StatelessWidget {
                   Expanded(
                     child: Container(
                       height: 200,
-                      margin: EdgeInsets.all(30),
-                      padding: EdgeInsets.all(30),
+
+                      margin: EdgeInsets.all(10),
+                      padding: EdgeInsets.all(25),
                       decoration: BoxDecoration(
                         color: AppConstants.primaryColor,
                         borderRadius: BorderRadius.circular(16),
@@ -181,13 +190,13 @@ class ProfileDash extends StatelessWidget {
                       elevation: 5,
 
                       child: Padding(
-                        padding: const EdgeInsets.all(20.0),
+                        padding: const EdgeInsets.all(14.0),
                         child: Column(
                           spacing: 8,
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             CircleAvatar(
-                              radius: 25,
+                              radius: 20,
                               backgroundColor: AppConstants.primaryColor,
                               child: AppConstants.addIcon,
                             ),
@@ -198,7 +207,7 @@ class ProfileDash extends StatelessWidget {
                               style: TextStyle(
                                 overflow: TextOverflow.ellipsis,
                                 fontWeight: FontWeight.bold,
-                                fontSize: 13,
+                                fontSize: 10,
                               ),
                             ),
                           ],
@@ -227,18 +236,18 @@ class ProfileDash extends StatelessWidget {
                 spacing: 14,
                 children: [
                   ServiceWidget(
-                    icon: Image.asset('icons/head.png'),
+                    icon: 'head.png',
                     title: 'Electrical',
                     description: 'Description',
                   ),
                   ServiceWidget(
-                    icon: Image.asset('icons/head.png'),
+                    icon: 'head.png',
                     title: 'Education',
                     description: 'lorem 123',
                   ),
 
                   ServiceWidget(
-                    icon: Image.asset('icons/elec.png'),
+                    icon: 'elec.png',
                     title: 'Others',
                     description: 'Description',
                   ),

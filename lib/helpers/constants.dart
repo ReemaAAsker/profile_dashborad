@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 class AppConstants {
-  static const Color primaryColor = Color(0xff0601B4);
-  //  Color(0xffDF3222);
-  static const Color light_primary_color = Color.fromARGB(94, 132, 128, 238);
-  // Color(0xffFDEDEB);
+  static const Color primaryColor = Color(0xffDF3222);
+  //  Color(0xff0601B4);
+
+  static const Color light_primary_color = Color(0xffFDEDEB);
+  //  Color.fromARGB(94, 132, 128, 238);
+  //
   static const TextStyle primary_numbers_text_style = TextStyle(
     fontSize: 20,
     fontWeight: FontWeight.bold,
