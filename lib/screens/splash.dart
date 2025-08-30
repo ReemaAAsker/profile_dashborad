@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:profile_dashboard/helpers/constants.dart';
+import 'package:profile_dashboard/helpers/routes.dart';
 import 'package:profile_dashboard/screens/login.dart';
 import 'package:profile_dashboard/screens/profile_dash.dart';
 
@@ -48,13 +49,14 @@ class SplashScreen extends StatelessWidget {
 
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pushReplacement(
-                  CupertinoPageRoute(
-                    builder: (context) {
-                      return LoginScreen();
-                    },
-                  ),
-                );
+                Navigator.pushReplacementNamed(context, AppRoutes.login);
+                // Navigator.of(context).pushReplacement(
+                //   CupertinoPageRoute(
+                //     builder: (context) {
+                //       return LoginScreen();
+                //     },
+                //   ),
+                // );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,

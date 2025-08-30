@@ -1,21 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:profile_dashboard/helpers/constants.dart';
-import 'package:profile_dashboard/screens/splash.dart';
+import 'package:profile_dashboard/helpers/routes.dart';
+
 import 'package:profile_dashboard/widgets/feedback_widget.dart';
 import 'package:profile_dashboard/widgets/house_widget.dart';
 import 'package:profile_dashboard/widgets/section_widget.dart';
 import 'package:profile_dashboard/widgets/service_widget.dart';
 
-class ProfileDash extends StatelessWidget {
-  String emailUser;
-  ProfileDash(this.emailUser, {super.key});
+class ProfileDashBoard extends StatelessWidget {
+  List<String> servicesName = [
+    'electrical',
+    'educational',
+    'plumbing',
+    'painting',
+  ];
+
+  //this.emailUser,
+  ProfileDashBoard({super.key});
 
   @override
   Widget build(BuildContext context) {
+    String email = ModalRoute.of(context)?.settings.arguments as String;
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).canPop();
+          Navigator.canPop(context);
         },
         child: Icon(Icons.help),
       ),
@@ -47,7 +56,7 @@ class ProfileDash extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Hello $emailUser'),
+              Text('Hello $email'),
               Row(
                 spacing: 20,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -230,7 +239,24 @@ class ProfileDash extends StatelessWidget {
               ),
               SizedBox(height: AppConstants.height),
 
-              SectionWidget(title: 'Services'),
+              SectionWidget(
+                title: 'Services',
+                on_tap: () {
+                  Navigator.pushNamed(
+                    context,
+                    AppRoutes.services,
+                    arguments: servicesName,
+                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) {
+                  //       return ServicesScreen(servicesName: servicesName);
+                  //     },
+                  //   ),
+                  // );
+                },
+              ),
 
               SizedBox(height: AppConstants.height),
 

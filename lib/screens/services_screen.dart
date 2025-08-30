@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+
 import 'package:profile_dashboard/helpers/constants.dart';
-import 'package:profile_dashboard/screens/splash.dart';
+import 'package:profile_dashboard/helpers/routes.dart';
+import 'package:profile_dashboard/widgets/service_widget.dart';
 
 class ServicesScreen extends StatelessWidget {
-  const ServicesScreen({super.key});
+  ServicesScreen({Key? key}) : super(key: key);
+
+  // widget(widget) ,, count
 
   @override
   Widget build(BuildContext context) {
+    List<String> servicesName =
+        ModalRoute.of(context)?.settings.arguments as List<String>;
     return Scaffold(
       appBar: AppBar(
         title: Text("Services"),
@@ -14,9 +20,10 @@ class ServicesScreen extends StatelessWidget {
           InkWell(
             onTap: () =>
                 //  Navigator.popUntil(context, (route) => route.isFirst),
-                Navigator.pushAndRemoveUntil(
+                Navigator.pushNamedAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => SplashScreen()),
+                  AppRoutes.splash,
+                  // MaterialPageRoute(builder: (context) => SplashScreen()),
                   (route) => false,
                 ),
             child: Icon(Icons.logout, color: AppConstants.primaryColor),
@@ -24,7 +31,24 @@ class ServicesScreen extends StatelessWidget {
           SizedBox(width: 20),
         ],
       ),
-      body: Center(child: Center(child: Text("Services Screen"))),
+      body: ListView.separated(
+        separatorBuilder: (context, index) {
+          return Divider();
+        },
+
+        shrinkWrap: true,
+        itemCount: servicesName.length,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: ServiceWidget(
+              icon: 'elec.png',
+              title: servicesName[index],
+              description: 'lorem',
+            ),
+          );
+        },
+      ),
     );
   }
 }
